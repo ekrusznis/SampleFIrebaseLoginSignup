@@ -10,9 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ek.firebaselogin.Helper.CircleTransform;
-import com.ek.firebaselogin.Models.Datum;
-import com.ek.firebaselogin.NewModels.SearchVidResponse;
-import com.ek.firebaselogin.NewModels.Video;
+import com.ek.firebaselogin.Models.Video;
 import com.ek.firebaselogin.R;
 import com.squareup.picasso.Picasso;
 
@@ -21,7 +19,6 @@ import java.util.List;
 public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.CustomViewHolder> {
 
     private Context context;
-//    private List<Datum> dataList;
     private List<Video> videos;
 
     public VerticalAdapter(Context context, List<Video> videos){
@@ -48,9 +45,6 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.Custom
         Picasso.get()
                 .load(video.getVideo().getDefaultThumb())
                 .into(holder.fullImage);
-//        Picasso.get()
-//                .load(datum.getImage())
-//                .into(holder.fullImage);
 
         holder.nameTextView.setText(videos.get(position).getVideo().getTitle());
 

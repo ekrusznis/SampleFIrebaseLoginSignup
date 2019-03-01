@@ -1,8 +1,6 @@
 package com.ek.firebaselogin.API;
 
-import com.ek.firebaselogin.Models.JsonData;
-import com.ek.firebaselogin.NewModels.SearchVidResponse;
-
+import com.ek.firebaselogin.Models.SearchVidResponse;
 import retrofit2.Call;
 import retrofit2.http.GET;
 

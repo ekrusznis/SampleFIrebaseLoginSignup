@@ -1,32 +1,23 @@
-package com.ek.firebaselogin;
+package com.ek.firebaselogin.UI;
 
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ek.firebaselogin.API.ApiInterface;
 import com.ek.firebaselogin.API.RetrofitApiClient;
-import com.ek.firebaselogin.Adapters.HorizontalAdapter;
 import com.ek.firebaselogin.Adapters.VerticalAdapter;
-import com.ek.firebaselogin.Helper.GridSpacingItemDecoration;
 import com.ek.firebaselogin.Helper.NetworkCheckingClass;
-import com.ek.firebaselogin.Models.Datum;
-import com.ek.firebaselogin.Models.JsonData;
-import com.ek.firebaselogin.Models.Popular;
-import com.ek.firebaselogin.NewModels.SearchVidResponse;
-import com.ek.firebaselogin.NewModels.Video;
+import com.ek.firebaselogin.Models.SearchVidResponse;
+import com.ek.firebaselogin.Models.Video;
+import com.ek.firebaselogin.R;
 
-import java.util.Collections;
 import java.util.List;
 
 import retrofit2.Call;
@@ -42,9 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
     RecyclerView recyclerViewHorizontal;
     RecyclerView recyclerViewVertical;
-    HorizontalAdapter horizontalAdapter;
     VerticalAdapter verticalAdapter;
-    List<Popular> popularList;
     List<Video> dataList;
     ProgressBar progressBar;
     RelativeLayout relativeLayout;
@@ -63,9 +52,6 @@ public class MainActivity extends AppCompatActivity {
         recyclerViewVertical.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
 
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
-
-        popularList = Collections.<Popular>emptyList();
-//        dataList = Collections.<Datum>emptyList();
         apiInterface = RetrofitApiClient.getClient().create(ApiInterface.class);
 
         if (NetworkCheckingClass.isNetworkAvailable(this)) {
@@ -89,19 +75,11 @@ public class MainActivity extends AppCompatActivity {
 
 //                popularList = jsonData.getPopular();
                 dataList = jsonData.getVideos();
-
-                int spacingInPixels = getResources().getDimensionPixelSize(R.dimen.activity_horizontal_margin);
-
-                //for spacing after every item
-                if (popularList.size() > 0)
-                    recyclerViewHorizontal.addItemDecoration(new GridSpacingItemDecoration(popularList.size(), spacingInPixels, true, 0));
-
                 progressBar.setVisibility(View.GONE);
                 relativeLayout.setBackgroundColor(Color.parseColor("#3481c1"));
 
 
-                horizontalAdapter = new HorizontalAdapter(MainActivity.this, popularList);
-                recyclerViewHorizontal.setAdapter(horizontalAdapter);
+//                horizontalAdapter = new HorizontalAdapter(MainActivity.this, popularList);
                 verticalAdapter = new VerticalAdapter(MainActivity.this, dataList);
                 recyclerViewVertical.setAdapter(verticalAdapter);
             }

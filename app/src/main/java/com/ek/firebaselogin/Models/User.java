@@ -1,6 +1,6 @@
-package com.ek.firebaselogin;
+package com.ek.firebaselogin.Models;
 
-class User {
+public class User {
     String Displayname;
 
 

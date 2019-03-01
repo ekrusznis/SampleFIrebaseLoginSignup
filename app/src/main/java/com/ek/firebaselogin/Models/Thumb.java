@@ -1,4 +1,4 @@
-package com.ek.firebaselogin.NewModels;
+package com.ek.firebaselogin.Models;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
