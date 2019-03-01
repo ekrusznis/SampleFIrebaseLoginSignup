@@ -8,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitApiClient {
 
-    private static final String BASE_URL = "https://raw.githubusercontent.com/hasancse91/Android-CardView-RecyclerView/master/Related_Data/";
+    private static final String BASE_URL = "https://api.redtube.com/";
 
     private static Retrofit retrofit = null;
 

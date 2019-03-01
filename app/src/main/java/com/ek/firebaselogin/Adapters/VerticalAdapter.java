@@ -11,6 +11,8 @@ import android.widget.Toast;
 
 import com.ek.firebaselogin.Helper.CircleTransform;
 import com.ek.firebaselogin.Models.Datum;
+import com.ek.firebaselogin.NewModels.SearchVidResponse;
+import com.ek.firebaselogin.NewModels.Video;
 import com.ek.firebaselogin.R;
 import com.squareup.picasso.Picasso;
 
@@ -19,11 +21,12 @@ import java.util.List;
 public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.CustomViewHolder> {
 
     private Context context;
-    private List<Datum> dataList;
+//    private List<Datum> dataList;
+    private List<Video> videos;
 
-    public VerticalAdapter(Context context, List<Datum> dataList){
+    public VerticalAdapter(Context context, List<Video> videos){
         this.context = context;
-        this.dataList = dataList;
+        this.videos = videos;
     }
 
     @Override
@@ -39,26 +42,29 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.Custom
 
     @Override
     public void onBindViewHolder(VerticalAdapter.CustomViewHolder holder, int position) {
-
-        Datum datum = dataList.get(position);
+//        Datum datum = dataList.get(position);
+        Video video = videos.get(position);
 
         Picasso.get()
-                .load(datum.getImage())
+                .load(video.getVideo().getDefaultThumb())
                 .into(holder.fullImage);
+//        Picasso.get()
+//                .load(datum.getImage())
+//                .into(holder.fullImage);
 
-        holder.nameTextView.setText(datum.getTitle());
+        holder.nameTextView.setText(videos.get(position).getVideo().getTitle());
 
         Picasso.get()
-                .load(datum.getNameImage())
+                .load(videos.get(position).getVideo().getEmbedUrl())
                 .transform(new CircleTransform())
                 .into(holder.profileImage);
 
-        holder.profileName.setText(datum.getName());
+        holder.profileName.setText(videos.get(position).getVideo().getVideoId());
     }
 
     @Override
     public int getItemCount() {
-        return (dataList!=null ? dataList.size() : 0);
+        return (videos!=null ? videos.size() : 0);
     }
 
 
@@ -93,7 +99,7 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.Custom
         @Override
         public void onClick(View v) {
             int clickedPosition = getAdapterPosition();
-            Toast.makeText(context, dataList.get(clickedPosition).getName(), Toast.LENGTH_LONG).show();
+            Toast.makeText(context, videos.get(clickedPosition).getVideo().getTitle(), Toast.LENGTH_LONG).show();
         }
     }
 }

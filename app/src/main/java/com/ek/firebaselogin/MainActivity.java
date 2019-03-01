@@ -23,6 +23,8 @@ import com.ek.firebaselogin.Helper.NetworkCheckingClass;
 import com.ek.firebaselogin.Models.Datum;
 import com.ek.firebaselogin.Models.JsonData;
 import com.ek.firebaselogin.Models.Popular;
+import com.ek.firebaselogin.NewModels.SearchVidResponse;
+import com.ek.firebaselogin.NewModels.Video;
 
 import java.util.Collections;
 import java.util.List;
@@ -43,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
     HorizontalAdapter horizontalAdapter;
     VerticalAdapter verticalAdapter;
     List<Popular> popularList;
-    List<Datum> dataList;
+    List<Video> dataList;
     ProgressBar progressBar;
     RelativeLayout relativeLayout;
     private ApiInterface apiInterface;
@@ -63,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
         popularList = Collections.<Popular>emptyList();
-        dataList = Collections.<Datum>emptyList();
+//        dataList = Collections.<Datum>emptyList();
         apiInterface = RetrofitApiClient.getClient().create(ApiInterface.class);
 
         if (NetworkCheckingClass.isNetworkAvailable(this)) {
@@ -78,15 +80,15 @@ public class MainActivity extends AppCompatActivity {
 
     private void fetchData() {
 
-        Call<JsonData> call = apiInterface.apiCall();
-        call.enqueue(new Callback<JsonData>() {
+        Call<SearchVidResponse> call = apiInterface.apiCall();
+        call.enqueue(new Callback<SearchVidResponse>() {
             @Override
-            public void onResponse(Call<JsonData> call, Response<JsonData> response) {
+            public void onResponse(Call<SearchVidResponse> call, Response<SearchVidResponse> response) {
 
-                JsonData jsonData = response.body();
+                SearchVidResponse jsonData = response.body();
 
-                popularList = jsonData.getPopular();
-                dataList = jsonData.getData();
+//                popularList = jsonData.getPopular();
+                dataList = jsonData.getVideos();
 
                 int spacingInPixels = getResources().getDimensionPixelSize(R.dimen.activity_horizontal_margin);
 
@@ -95,7 +97,6 @@ public class MainActivity extends AppCompatActivity {
                     recyclerViewHorizontal.addItemDecoration(new GridSpacingItemDecoration(popularList.size(), spacingInPixels, true, 0));
 
                 progressBar.setVisibility(View.GONE);
-
                 relativeLayout.setBackgroundColor(Color.parseColor("#3481c1"));
 
 
@@ -106,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<JsonData> call, Throwable t) {
+            public void onFailure(Call<SearchVidResponse> call, Throwable t) {
                 progressBar.setVisibility(View.GONE);
                 Toast.makeText(getApplicationContext(), t.toString(), Toast.LENGTH_LONG).show();
             }
