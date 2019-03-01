@@ -1,10 +1,12 @@
 package com.ek.firebaselogin.Adapters;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -12,6 +14,7 @@ import android.widget.Toast;
 import com.ek.firebaselogin.Helper.CircleTransform;
 import com.ek.firebaselogin.Models.Video;
 import com.ek.firebaselogin.R;
+import com.ek.firebaselogin.UI.WebviewActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -94,6 +97,12 @@ public class VerticalAdapter extends RecyclerView.Adapter<VerticalAdapter.Custom
         public void onClick(View v) {
             int clickedPosition = getAdapterPosition();
             Toast.makeText(context, videos.get(clickedPosition).getVideo().getTitle(), Toast.LENGTH_LONG).show();
+
+            Intent i = new Intent(v.getContext(), WebviewActivity.class);
+            String url = videos.get(clickedPosition).getVideo().getUrl();
+            i.putExtra("VIDEO_URL", url);
+            v.getContext().startActivity(i);
+
         }
     }
 }
