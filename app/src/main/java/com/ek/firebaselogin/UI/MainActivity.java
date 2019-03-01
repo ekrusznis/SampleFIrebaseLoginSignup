@@ -45,8 +45,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         relativeLayout = (RelativeLayout) findViewById(R.id.activity_main);
-
-        recyclerViewHorizontal = (RecyclerView) findViewById(R.id.horizontal_recycler_view);
         recyclerViewVertical = (RecyclerView) findViewById(R.id.vertical_recycler_view);
         recyclerViewHorizontal.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
         recyclerViewVertical.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
